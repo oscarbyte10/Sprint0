@@ -1,4 +1,4 @@
-import { getMedidas, addMedida, deleteMedida } from './../controllers/medidas.controller';
+import { getMedidas, addMedida, deleteMedida } from '../controllers/medida.controller';
 import {Router} from 'express';
 const router: Router = Router();
 

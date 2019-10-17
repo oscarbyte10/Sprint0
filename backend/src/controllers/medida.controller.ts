@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import Medida from './../models/Medida';
+import Medida from '../models/Medida';
 
 export const getMedidas =  async (req: Request, res: Response) => {
     await Medida.find({}, (err, medidas) => {
@@ -11,7 +11,7 @@ export const getMedidas =  async (req: Request, res: Response) => {
 export const addMedida = async (req: Request, res: Response) => {
     let medida = new Medida({
         valor: req.body.valor,
-        fecha: req.body.fecha
+        fecha: Date.now()
     });
     await medida.save( (err, medidaSaved) => {
         if(err) throw err;
