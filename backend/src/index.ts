@@ -1,5 +1,11 @@
 import app from './app';
+import './database';
+import bodyParser from 'body-parser';
 
-app.listen(app.get('port'));
+const PORT = app.get('port');
 
-console.log(`Servidor en puerto: ${app.get('port')}: Conectado`);
+app.use(bodyParser.json())
+
+app.listen(PORT, () => {
+    console.log(`Servidor en puerto: ${PORT}: Conectado`);
+});

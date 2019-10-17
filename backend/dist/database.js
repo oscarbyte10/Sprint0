@@ -8,7 +8,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const config = new config_1.Config();
 mongoose_1.default.connect(config.db, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 })
     .then(db => console.log('Base de datos: Conectada'))
     .catch(err => console.log(err));

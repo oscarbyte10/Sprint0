@@ -4,6 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
-app_1.default.listen(app_1.default.get('port'));
-console.log(`Servidor en puerto: ${app_1.default.get('port')}: Conectado`);
+require("./database");
+const body_parser_1 = __importDefault(require("body-parser"));
+const PORT = app_1.default.get('port');
+app_1.default.use(body_parser_1.default.json());
+app_1.default.listen(PORT, () => {
+    console.log(`Servidor en puerto: ${PORT}: Conectado`);
+});
 //# sourceMappingURL=index.js.map
