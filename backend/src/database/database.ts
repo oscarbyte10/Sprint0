@@ -1,4 +1,4 @@
-import { Config } from './config/config';
+import { Config } from '../config/config';
 import mongoose from 'mongoose';
 
 const config: Config = new Config();
