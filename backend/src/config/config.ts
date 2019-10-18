@@ -8,7 +8,7 @@ export class Config{
     db: string;
 
     constructor() {
-        this.port = process.env.PORT || 3000;
+        this.port = process.env.PORT || 4000;
         this.db = `mongodb://${credentials.username}:${credentials.password}@${credentials.host}:${credentials.puerto}/${credentials.database}`
         //this.db = process.env.MONGODB || 'mongodb://localhost:27017/medidas'
     }
