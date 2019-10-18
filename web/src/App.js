@@ -7,36 +7,35 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //items = [],
+      items: [],
       isLoaded: false,
     }
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/api/medidas')
-    .then(res => console.log(res) )
-    .then(json => {
+    fetch('http://the0sprint.herokuapp.com/api/medidas')
+    .then(res => {
+      return res.json()
+    })
+    .then(recurso => {
+      console.log(recurso);
       this.setState({
         isLoaded: true,
-        //items: json
+        items: recurso
       })
       
     })
   }
-
   render() {
     var { isLoaded, items } = this.state;
-
     if(!isLoaded) {
       return <div>Loading...</div>
     }
     else{
       return (
-        <div className="App">
-          <ul>
-            </ul>
+        <div>
+          {JSON.stringify(items.medidas)}
         </div>
-
       )
     }
   }
