@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:mobile/pages/SubirMedida.dart';
+import 'package:mobile/pages/MostrarMedidas.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,68 +17,40 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyTabs(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyTabs extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyTabsState createState() => new _MyTabsState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  Map data;
-  List medidasData;
-  void getUsers() async {
-    http.Response response = await http.get('http://the0sprint.herokuapp.com/api/medidas');
-    data = json.decode(response.body);
-    setState(() {
-      medidasData = data['medidas'];
-    });
-  }
-
+class _MyTabsState extends State<MyTabs> {
   @override
-  void initState() {
-    super.initState();
-    getUsers();
-  }
-
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Mobile"),
-        backgroundColor: Colors.amber,
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.add)),
+                Tab(icon: Icon(Icons.assignment))
+              ],
+            ),
+            title: Text('mobile'),
+          ),
+          body: TabBarView(
+            children: [
+              SubirMedida(),
+              MostrarMedidas(),
+            ],
+          ),
+        ),
       ),
-      body: ListView.builder(
-        itemCount: medidasData == null ? 0 : medidasData.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          "${index+1}",
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w400
-                          )
-                      )
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                      child: Text("${medidasData[index]["valor"]}" + "%")
-                    ,
-                  )
-                ],
-              )
-            )
-          );
-        },
-      )
     );
   }
 }
